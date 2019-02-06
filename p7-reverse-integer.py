@@ -20,16 +20,13 @@ class Solution:
             return 0
         elif x < 0:
             return -self.reverse(-x)
-        else:
-            head = x // 10
-            new_integer = x % 10
-            while head > 0:
-                remainder = head % 10
-                head = head // 10
-                new_integer = new_integer * 10 + remainder
-            if not self.is_int32(new_integer):
-                return 0
-            return new_integer
+        new_integer = 0
+        while x > 0:
+            new_integer = new_integer * 10 + x % 10
+            x = x // 10
+        if not self.is_int32(new_integer):
+            return 0
+        return new_integer
 
 
 class TestCases():
