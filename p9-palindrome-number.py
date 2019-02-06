@@ -32,5 +32,5 @@ class TestCases():
         # (9646324351, 0),
         # (1534236469, 0)
     ])
-    def test_reverse(self, x: int, result: bool):
+    def test_isPalindrome(self, x: int, result: bool):
         assert self.solution.isPalindrome(x) == result
