@@ -7,27 +7,19 @@ class Solution:
     """
 
     def numDecodings(self, s: str) -> int:
-        length = len(s)
-        if length == 0 or (length > 0 and s[0] == '0'):
+        if not s or s[0] == '0':
             return 0
-        if length == 1:
-            return 1
-        dp = [1] * len(s)
-        if s[1] == '0':
-            if s[0] not in ['1', '2']:
-                return 0
-        elif int(s[:2]) <= 26:
-            dp[1] = 2
-        for i in range(2, length):
+        dp = [1, 1]
+        for i in range(1, len(s)):
             if s[i] == '0':
                 if s[i - 1] not in ['1', '2']:
                     return 0
                 else:
-                    dp[i] = dp[i - 2]
-            elif s[i - 1] == '1' or (s[i - 1] == '2' and int(s[i]) <= 6):
-                dp[i] = dp[i - 1] + dp[i - 2]
+                    dp.append(dp[-2])
+            elif s[i - 1] == '1' or (s[i - 1] == '2' and s[i] <= '6'):
+                dp.append(dp[-1] + dp[-2])
             else:
-                dp[i] = dp[i - 1]
+                dp.append(dp[-1])
         return dp[-1]
 
 
