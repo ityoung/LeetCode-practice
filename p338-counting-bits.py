@@ -5,11 +5,8 @@ from typing import List
 class Solution:
     def countBits(self, num: int) -> List[int]:
         dp = [0]
-        for i in range(num):
-            carry = 0
-            if (i + 1) % 2 == 1:
-                carry = 1
-            dp.append(dp[(i + 1) // 2] + carry)
+        for i in range(1, num+1):
+            dp.append(dp[i >> 2] + (i % 2))
         return dp
 
 
